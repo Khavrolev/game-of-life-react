@@ -1,0 +1,27 @@
+.board {
+  display: grid;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #808080;
+}
+
+.cell:hover {
+  background-color: #ebe7e7;
+}
+
+.cell__pointer {
+  cursor: pointer;
+}
+
+.cell__filled {
+  background-color: #00ffff;
+}
+
+.cell__filled:hover {
+  background-color: #008b8b;
+}
