@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import React from "react";
 import { BOARD_SIZE } from "../../utils/constants";
 import classes from "./Board.module.css";
 

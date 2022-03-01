@@ -1,6 +1,6 @@
-import { getNextStep, getNeighbours } from "./getNextStep";
+import { getNextStep, getNeighbors } from "./getNextStep";
 
-describe("Check getNeighbours", () => {
+describe("Check getNeighbors", () => {
   const gameBoard = [
     [1, 0, 1, 0, 0],
     [1, 0, 1, 0, 0],
@@ -10,25 +10,25 @@ describe("Check getNeighbours", () => {
   ];
 
   it("left upper corner", () => {
-    expect(getNeighbours(gameBoard, 0, 0)).toBe(2);
+    expect(getNeighbors(gameBoard, 0, 0)).toBe(2);
   });
 
   it("right upper corner", () => {
-    expect(getNeighbours(gameBoard, 0, gameBoard[0].length - 1)).toBe(3);
+    expect(getNeighbors(gameBoard, 0, gameBoard[0].length - 1)).toBe(3);
   });
 
   it("left bottom corner", () => {
-    expect(getNeighbours(gameBoard, gameBoard.length - 1, 0)).toBe(2);
+    expect(getNeighbors(gameBoard, gameBoard.length - 1, 0)).toBe(2);
   });
 
   it("right bottom corner", () => {
     expect(
-      getNeighbours(gameBoard, gameBoard.length - 1, gameBoard[0].length - 1)
+      getNeighbors(gameBoard, gameBoard.length - 1, gameBoard[0].length - 1)
     ).toBe(3);
   });
 
   it("center", () => {
-    expect(getNeighbours(gameBoard, 2, 2)).toBe(2);
+    expect(getNeighbors(gameBoard, 2, 2)).toBe(2);
   });
 
   describe("Check getNextStep", () => {
