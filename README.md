@@ -16,4 +16,4 @@ npm run start
 
 - You can start/stop simulation by clicking start/stop button, also you can make next step clicking step button;
 
-- You can use [GitHub Pages] (https://Khavrolev.github.io/game-of-life-react).
+- You can use [GitHub Pages](https://Khavrolev.github.io/game-of-life-react).
