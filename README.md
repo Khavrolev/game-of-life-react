@@ -14,4 +14,6 @@ npm run start
 
 - You can choose random initialization or fill field manually by clicking on cells;
 
-- You can start/stop simulation by clicking start/stop button, also you can make next step clicking step button.
+- You can start/stop simulation by clicking start/stop button, also you can make next step clicking step button;
+
+- You can use [GitHub Pages] (https://Khavrolev.github.io/game-of-life-react).
