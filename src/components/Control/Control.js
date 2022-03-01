@@ -5,7 +5,7 @@ import classes from "./Control.module.css";
 const Control = ({ changeBoard, startLiving, makeStep, run, board }) => {
   return (
     <div className={classes.control}>
-      {<Button onClick={startLiving}>{run ? "Stop" : "Start"}</Button>}
+      <Button onClick={startLiving}>{run ? "Stop" : "Start"}</Button>
       <Button onClick={() => makeStep(board)} disabled={run}>
         Step
       </Button>
