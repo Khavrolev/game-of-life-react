@@ -8,9 +8,7 @@ import Board from "./components/Board/Board";
 import { DELAY_TIMEOUT } from "./utils/constants";
 
 const App = () => {
-  const [board, setBoard] = useState(() => {
-    return initBoard(true);
-  });
+  const [board, setBoard] = useState(initBoard(true));
 
   const [run, setRun] = useState(false);
 
