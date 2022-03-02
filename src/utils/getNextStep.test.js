@@ -124,19 +124,19 @@ describe("Check getNeighbors", () => {
 
 describe("Check countNeighbors", () => {
   const size = { rows: 5, columns: 5 };
-  const emptyBoard = [];
-  const board = [
-    "0-0",
-    "0-2",
-    "1-0",
-    "1-2",
-    "2-0",
-    "2-2",
-    "3-0",
-    "3-2",
-    "4-0",
-    "4-2",
-  ];
+  const emptyBoard = {};
+  const board = {
+    "0-0": true,
+    "0-2": true,
+    "1-0": true,
+    "1-2": true,
+    "2-0": true,
+    "2-2": true,
+    "3-0": true,
+    "3-2": true,
+    "4-0": true,
+    "4-2": true,
+  };
 
   it("empty board", () => {
     const cell = "1-6";
@@ -173,112 +173,140 @@ describe("Check getNextStep", () => {
   const size = { rows: 6, columns: 6 };
 
   it("should return board with 0 getting board with 0", () => {
-    const board = [];
-    const result = [];
+    const board = {};
+    const result = {};
     expect(getNextStep(board, size)).toEqual(result);
   });
 
   it("should return board with 0 getting board with 1", () => {
-    const board = [
-      "0-0",
-      "0-1",
-      "0-2",
-      "0-3",
-      "0-4",
-      "1-0",
-      "1-1",
-      "1-2",
-      "1-3",
-      "1-4",
-      "1-5",
-      "2-0",
-      "2-1",
-      "2-2",
-      "2-3",
-      "2-4",
-      "2-5",
-      "3-0",
-      "3-1",
-      "3-2",
-      "3-3",
-      "3-4",
-      "3-5",
-      "4-0",
-      "4-1",
-      "4-2",
-      "4-3",
-      "4-4",
-      "4-5",
-      "5-0",
-      "5-1",
-      "5-2",
-      "5-3",
-      "5-4",
-      "5-5",
-    ];
-    const result = [];
+    const board = {
+      "0-0": true,
+      "0-1": true,
+      "0-2": true,
+      "0-3": true,
+      "0-4": true,
+      "1-0": true,
+      "1-1": true,
+      "1-2": true,
+      "1-3": true,
+      "1-4": true,
+      "1-5": true,
+      "2-0": true,
+      "2-1": true,
+      "2-2": true,
+      "2-3": true,
+      "2-4": true,
+      "2-5": true,
+      "3-0": true,
+      "3-1": true,
+      "3-2": true,
+      "3-3": true,
+      "3-4": true,
+      "3-5": true,
+      "4-0": true,
+      "4-1": true,
+      "4-2": true,
+      "4-3": true,
+      "4-4": true,
+      "4-5": true,
+      "5-0": true,
+      "5-1": true,
+      "5-2": true,
+      "5-3": true,
+      "5-4": true,
+      "5-5": true,
+    };
+    const result = {};
     expect(getNextStep(board, size)).toEqual(result);
   });
 
   it("Glider", () => {
-    const board = ["0-1", "1-2", "2-0", "2-1", "2-2"];
-    const result = ["1-0", "1-2", "2-1", "2-2", "3-1"];
+    const board = {
+      "0-1": true,
+      "1-2": true,
+      "2-0": true,
+      "2-1": true,
+      "2-2": true,
+    };
+    const result = {
+      "1-0": true,
+      "1-2": true,
+      "2-1": true,
+      "2-2": true,
+      "3-1": true,
+    };
     expect(getNextStep(board, size)).toEqual(result);
   });
 
   it("Blinker", () => {
-    const board = ["0-1", "1-1", "2-1"];
-    const result = ["1-0", "1-1", "1-2"];
+    const board = { "0-1": true, "1-1": true, "2-1": true };
+    const result = { "1-0": true, "1-1": true, "1-2": true };
     expect(getNextStep(board, size)).toEqual(result);
   });
 
   it("Loaf", () => {
-    const board = ["0-1", "0-2", "1-0", "1-3", "2-1", "2-3", "3-2"];
-    const result = ["0-1", "0-2", "1-0", "1-3", "2-1", "2-3", "3-2"];
+    const board = {
+      "0-1": true,
+      "0-2": true,
+      "1-0": true,
+      "1-3": true,
+      "2-1": true,
+      "2-3": true,
+      "3-2": true,
+    };
+    const result = {
+      "0-1": true,
+      "0-2": true,
+      "1-0": true,
+      "1-3": true,
+      "2-1": true,
+      "2-3": true,
+      "3-2": true,
+    };
     expect(getNextStep(board, size)).toEqual(result);
   });
 
   it("should return this very board", () => {
-    const board = [
-      "0-0",
-      "0-2",
-      "1-0",
-      "1-2",
-      "2-0",
-      "2-2",
-      "3-0",
-      "3-2",
-      "4-0",
-      "4-2",
-      "5-0",
-      "5-2",
-    ];
-    const result = [
-      "0-0",
-      "0-2",
-      "0-3",
-      "0-5",
-      "1-0",
-      "1-2",
-      "1-3",
-      "1-5",
-      "2-0",
-      "2-2",
-      "2-3",
-      "2-5",
-      "3-0",
-      "3-2",
-      "3-3",
-      "3-5",
-      "4-0",
-      "4-2",
-      "4-3",
-      "4-5",
-      "5-0",
-      "5-2",
-      "5-3",
-      "5-5",
-    ];
+    const board = {
+      "0-0": true,
+      "0-2": true,
+      "1-0": true,
+      "1-2": true,
+      "2-0": true,
+      "2-2": true,
+      "3-0": true,
+      "3-2": true,
+      "4-0": true,
+      "4-2": true,
+      "5-0": true,
+      "5-2": true,
+    };
+    const result = {
+      "0-0": true,
+      "0-2": true,
+      "0-3": true,
+      "0-5": true,
+      "1-0": true,
+      "1-2": true,
+      "1-3": true,
+      "1-5": true,
+      "2-0": true,
+      "2-2": true,
+      "2-3": true,
+      "2-5": true,
+      "3-0": true,
+      "3-2": true,
+      "3-3": true,
+      "3-5": true,
+      "4-0": true,
+      "4-2": true,
+      "4-3": true,
+      "4-5": true,
+      "5-0": true,
+      "5-2": true,
+      "5-3": true,
+      "5-5": true,
+    };
     expect(getNextStep(board, size)).toEqual(result);
   });
 });

@@ -2,33 +2,35 @@ const ALIVE_FOR_ALIVE = [2, 3];
 const ALIVE_FOR_DEAD = [3];
 
 export const getNextStep = (currentState, size) => {
-  const nextState = [];
-  const neighbors = [];
-
-  currentState.forEach((cell) =>
-    neighbors.push(cell, ...getNeighbors(size, cell))
-  );
+  const neighbors = Object.keys(currentState)
+    .reduce((sum, cell) => {
+      sum.push(cell, ...getNeighbors(size, cell));
+      return sum;
+    }, [])
+    .sort();
 
   const uniqueNeighbors = new Set(neighbors);
 
-  uniqueNeighbors.forEach((cell) => {
+  const nextState = [...uniqueNeighbors].reduce((sum, cell) => {
     const counter = countNeighbors(currentState, size, cell);
 
     if (
-      (currentState.includes(cell) && ALIVE_FOR_ALIVE.includes(counter)) ||
-      (!currentState.includes(cell) && ALIVE_FOR_DEAD.includes(counter))
+      (currentState[cell] && ALIVE_FOR_ALIVE.includes(counter)) ||
+      (!currentState[cell] && ALIVE_FOR_DEAD.includes(counter))
     ) {
-      nextState.push(cell);
+      sum[cell] = true;
     }
-  });
 
-  return nextState.sort();
+    return sum;
+  }, {});
+
+  return nextState;
 };
 
 export const countNeighbors = (currentState, size, cell) => {
   const neighbors = getNeighbors(size, cell);
 
-  return neighbors.filter((cell) => currentState.includes(cell)).length;
+  return neighbors.filter((cell) => currentState[cell]).length;
 };
 
 export const getNeighbors = (size, cell) => {
