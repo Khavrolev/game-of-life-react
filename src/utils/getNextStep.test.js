@@ -281,25 +281,4 @@ describe("Check getNextStep", () => {
     ];
     expect(getNextStep(board, size)).toEqual(result);
   });
-
-  //     it("should return this very board", () => {
-  //       const gameBoard = [
-  //         [1, 0, 1, 0, 0, 0],
-  //         [1, 0, 1, 0, 0, 0],
-  //         [1, 0, 1, 0, 0, 0],
-  //         [1, 0, 1, 0, 0, 0],
-  //         [1, 0, 1, 0, 0, 0],
-  //         [1, 0, 1, 0, 0, 0],
-  //       ];
-  //       const result = [
-  //         [1, 0, 1, 1, 0 1],
-  //         [1, 0, 1, 1, 0 1],
-  //         [1, 0, 1, 1, 0 1],
-  //         [1, 0, 1, 1, 0 1],
-  //         [1, 0, 1, 1, 0 1],
-  //         [1, 0, 1, 1, 0 1],
-  //       ];
-  //       expect(getNextStep(gameBoard)).toEqual(result);
-  //     });
-  //   });
 });
