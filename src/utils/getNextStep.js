@@ -1,63 +1,64 @@
 const ALIVE_FOR_ALIVE = [2, 3];
 const ALIVE_FOR_DEAD = [3];
 
-export const getNextStep = (currentState) => {
-  if (!Array.isArray(currentState)) {
-    throw new Error(`Board is't array`);
-  }
-
+export const getNextStep = (currentState, size) => {
   const nextState = [];
+  const neighbors = [];
 
-  for (let row = 0; row < currentState.length; row++) {
-    if (!Array.isArray(currentState[row])) {
-      throw new Error(`Board contains not array`);
+  currentState.forEach((cell) =>
+    neighbors.push(cell, ...getNeighbors(size, cell))
+  );
+
+  const uniqueNeighbors = new Set(neighbors);
+
+  uniqueNeighbors.forEach((cell) => {
+    const counter = countNeighbors(currentState, size, cell);
+
+    if (
+      (currentState.includes(cell) && ALIVE_FOR_ALIVE.includes(counter)) ||
+      (!currentState.includes(cell) && ALIVE_FOR_DEAD.includes(counter))
+    ) {
+      nextState.push(cell);
     }
+  });
 
-    if (currentState[row].length !== currentState[0].length) {
-      throw new Error(`Arrays in array does't have same dimensions`);
-    }
-
-    nextState.push([]);
-
-    for (let column = 0; column < currentState[row].length; column++) {
-      const neighbors = getNeighbors(currentState, row, column);
-
-      if (currentState[row][column] === 1) {
-        if (ALIVE_FOR_ALIVE.includes(neighbors)) {
-          nextState[row][column] = 1;
-        } else {
-          nextState[row][column] = 0;
-        }
-      } else {
-        if (ALIVE_FOR_DEAD.includes(neighbors)) {
-          nextState[row][column] = 1;
-        } else {
-          nextState[row][column] = 0;
-        }
-      }
-    }
-  }
-
-  return nextState;
+  return nextState.sort();
 };
 
-export const getNeighbors = (currentState, row, column) => {
-  const totalRows = currentState.length;
-  const totalColumns = currentState[0].length;
+export const countNeighbors = (currentState, size, cell) => {
+  const neighbors = getNeighbors(size, cell);
 
-  const topRow = row === 0 ? totalRows - 1 : row - 1;
-  const bottomRow = row === totalRows - 1 ? 0 : row + 1;
-  const leftColumn = column === 0 ? totalColumns - 1 : column - 1;
-  const rightColumn = column === totalColumns - 1 ? 0 : column + 1;
+  return neighbors.filter((cell) => currentState.includes(cell)).length;
+};
 
-  return (
-    currentState[topRow][leftColumn] +
-    currentState[topRow][column] +
-    currentState[topRow][rightColumn] +
-    currentState[row][leftColumn] +
-    currentState[row][rightColumn] +
-    currentState[bottomRow][leftColumn] +
-    currentState[bottomRow][column] +
-    currentState[bottomRow][rightColumn]
-  );
+export const getNeighbors = (size, cell) => {
+  const coordinates = getCoordinates(cell);
+
+  const topRow = coordinates.row === 0 ? size.rows - 1 : coordinates.row - 1;
+  const bottomRow = coordinates.row === size.rows - 1 ? 0 : coordinates.row + 1;
+  const leftColumn =
+    coordinates.column === 0 ? size.columns - 1 : coordinates.column - 1;
+  const rightColumn =
+    coordinates.column === size.columns - 1 ? 0 : coordinates.column + 1;
+
+  return [
+    `${topRow}-${leftColumn}`,
+    `${topRow}-${coordinates.column}`,
+    `${topRow}-${rightColumn}`,
+    `${coordinates.row}-${leftColumn}`,
+    `${coordinates.row}-${rightColumn}`,
+    `${bottomRow}-${leftColumn}`,
+    `${bottomRow}-${coordinates.column}`,
+    `${bottomRow}-${rightColumn}`,
+  ];
+};
+
+export const getCoordinates = (cell) => {
+  const cellArray = cell.split("-");
+
+  if (cellArray.length !== 2 || cellArray.includes("")) {
+    throw new Error(`Wrong input`);
+  }
+
+  return { row: +cellArray[0], column: +cellArray[1] };
 };
