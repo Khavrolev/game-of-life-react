@@ -1,12 +1,17 @@
 import { BOARD_SIZE } from "./constants";
 
 export const initBoard = (isEmpty) => {
-  const initState = [];
-  for (let i = 0; i < BOARD_SIZE.rows; i++) {
-    initState.push([]);
+  const initState = {};
 
+  if (isEmpty) {
+    return initState;
+  }
+
+  for (let i = 0; i < BOARD_SIZE.rows; i++) {
     for (let j = 0; j < BOARD_SIZE.columns; j++) {
-      initState[i][j] = isEmpty ? 0 : Math.round(Math.random());
+      if (Math.round(Math.random()) === 1) {
+        initState[`${i}-${j}`] = true;
+      }
     }
   }
 

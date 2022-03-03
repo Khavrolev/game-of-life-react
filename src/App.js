@@ -5,22 +5,22 @@ import { getNextStep } from "./utils/getNextStep";
 import useInterval from "use-interval";
 import Control from "./components/Control/Control";
 import Board from "./components/Board/Board";
-import { DELAY_TIMEOUT } from "./utils/constants";
+import { BOARD_SIZE, DELAY_TIMEOUT } from "./utils/constants";
 
 const App = () => {
-  const [board, setBoard] = useState(initBoard(true));
+  const [state, setState] = useState(initBoard(true));
 
   const [run, setRun] = useState(false);
 
   useInterval(
     () => {
-      setBoard(getNextStep(board));
+      setState(getNextStep(state, BOARD_SIZE));
     },
     run ? DELAY_TIMEOUT : null
   );
 
-  const changeBoard = useCallback((value) => {
-    setBoard(value);
+  const changeState = useCallback((value) => {
+    setState(value);
   }, []);
 
   const startLiving = useCallback(() => {
@@ -28,7 +28,7 @@ const App = () => {
   }, []);
 
   const makeStep = useCallback((value) => {
-    setBoard(getNextStep(value));
+    setState(getNextStep(value, BOARD_SIZE));
   }, []);
 
   return (
@@ -37,11 +37,11 @@ const App = () => {
       <Control
         startLiving={startLiving}
         makeStep={makeStep}
-        changeBoard={changeBoard}
+        changeState={changeState}
         run={run}
-        board={board}
+        state={state}
       />
-      <Board changeBoard={changeBoard} run={run} board={board} />
+      <Board changeState={changeState} run={run} state={state} />
     </div>
   );
 };

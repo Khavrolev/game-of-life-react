@@ -1,18 +1,18 @@
 import { initBoard } from "../../utils/init";
-import Button from "../button/Button";
+import Button from "../Button/Button";
 import classes from "./Control.module.css";
 
-const Control = ({ changeBoard, startLiving, makeStep, run, board }) => {
+const Control = ({ changeState, startLiving, makeStep, run, state }) => {
   return (
     <div className={classes.control}>
       <Button onClick={startLiving}>{run ? "Stop" : "Start"}</Button>
-      <Button onClick={() => makeStep(board)} disabled={run}>
+      <Button onClick={() => makeStep(state)} disabled={run}>
         Step
       </Button>
-      <Button onClick={() => changeBoard(initBoard(false))} disabled={run}>
+      <Button onClick={() => changeState(initBoard(false))} disabled={run}>
         Random init
       </Button>
-      <Button onClick={() => changeBoard(initBoard(true))} disabled={run}>
+      <Button onClick={() => changeState(initBoard(true))} disabled={run}>
         Clear
       </Button>
     </div>
