@@ -31,8 +31,8 @@ const Board = ({ changeState, run, state }) => {
           <div
             key={`${i}-${j}`}
             className={classNames(classes.cell, {
-              [classes.cell__filled]: state[`${i}-${j}`],
-              [classes.cell__pointer]: !run,
+              [classes.cell_filled]: state[`${i}-${j}`],
+              [classes.cell_pointer]: !run,
             })}
             data-row={i}
             data-column={j}

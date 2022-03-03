@@ -9,9 +9,7 @@ export const getNextStep = (currentState, size) => {
     }, [])
     .sort();
 
-  const uniqueNeighbors = new Set(neighbors);
-
-  const nextState = [...uniqueNeighbors].reduce((sum, cell) => {
+  const nextState = [...new Set(neighbors)].reduce((sum, cell) => {
     const counter = countNeighbors(currentState, size, cell);
 
     if (

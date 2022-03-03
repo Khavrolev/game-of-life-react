@@ -14,14 +14,14 @@
   background-color: #ebe7e7;
 }
 
-.cell__pointer {
+.cell_pointer {
   cursor: pointer;
 }
 
-.cell__filled {
+.cell_filled {
   background-color: #00ffff;
 }
 
-.cell__filled:hover {
+.cell_filled:hover {
   background-color: #008b8b;
 }
